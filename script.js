@@ -51,28 +51,31 @@ const choices = ['rock', 'paper', 'scissors'];
 
 
 
-for (let i = 0; i < 5; i++) {
+for (let i = 0, j = 0; i < 5 || j < 5; ) {
     
     let userChoice = prompt("Please enter your choice")
 
-    if (choices.includes(userChoice)) {
-        console.log('OK');
-    }
     
-    else {
-        while (!(choices.includes(userChoice)))
+        while (!(choices.includes(userChoice))){
     userChoice = prompt("You have to enter \"rock\", \"paper\" or \"scissors\"");
     }
 
-    compareChoices(getComputerChoice(), userChoice)
-
-    if (compareChoices(getComputerChoice(), userChoice).includes('computer')){
-        i++;
-        console.log(compareChoices(getComputerChoice(), userChoice));
-    }
+    let result = compareChoices(getComputerChoice(), userChoice);
     
-   
+    if (result.includes("computer")){
+        
+        
+        i++;
+    }
+    else if (result.includes("you")) {
+        
+        
+        j++;
+    }  
+    
     console.log(i);
+    console.log(j);
+
     
 }
 
