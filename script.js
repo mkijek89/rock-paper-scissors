@@ -1,16 +1,17 @@
 function getComputerChoice() {
-    const choices = ['rock', 'paper', 'scissors'];
+    const choices = ['ROCK', 'PAPER', 'SCISSORS'];
 
     return choices[Math.floor(Math.random()* choices.length)];
 }
 
+// In the future improve this part
 function compareChoices(a,b) {
     switch (a) {
-        case 'rock':
-            if (b == "rock"){
+        case 'ROCK':
+            if (b == "ROCK"){
                 return "It's a draw";
             }
-            else if (b == 'scissors'){
+            else if (b == 'SCISSORS'){
                 return "Rock beats scissors, computer wins!";
             }
             else {
@@ -18,11 +19,11 @@ function compareChoices(a,b) {
             }
             break;
 
-        case 'scissors':
-            if (b == "rock"){
+        case 'SCISSORS':
+            if (b == "ROCK"){
                 return "Rock beats scissors, you win!";
             }
-            else if (b == 'scissors'){
+            else if (b == 'SCISSORS'){
                 return "It's a draw";
             }
             else {
@@ -30,11 +31,11 @@ function compareChoices(a,b) {
             }
             break;
 
-        case 'paper':
-            if (b == "rock"){
+        case 'PAPER':
+            if (b == "ROCK"){
                 return "Paper beats rock, computer wins!";
             }
-            else if (b == 'scissors'){
+            else if (b == 'SCISSORS'){
                 return "Scissors beat paper, you win!";
             }
             else {
@@ -45,7 +46,7 @@ function compareChoices(a,b) {
 
 }
 
-const choices = ['rock', 'paper', 'scissors'];
+const choices = ['ROCK', 'PAPER', 'SCISSORS'];
 
 
 
@@ -53,14 +54,14 @@ const choices = ['rock', 'paper', 'scissors'];
 
 for (let i = 0, j = 0; i < 5 || j < 5; ) {
     
-    let userChoice = prompt("Please enter your choice")
+    let userChoice = prompt("Please enter your choice").toUpperCase();
 
     
         while (!(choices.includes(userChoice))){
     userChoice = prompt("You have to enter \"rock\", \"paper\" or \"scissors\"");
     }
 
-    let result = compareChoices(getComputerChoice(), userChoice);
+    let result = compareChoices(getComputerChoice(), userChoice.toUpperCase());
     
     if (result.includes("computer")){
         
@@ -73,8 +74,15 @@ for (let i = 0, j = 0; i < 5 || j < 5; ) {
         j++;
     }  
     
-    console.log(i);
-    console.log(j);
+    if (i <5 || j <5) {
+        console.log('Game in progress');
+    }
+    else if (i == 5) {
+        console.log('Computer wins the game!');
+    }
+    else {
+        console.log('Congratulations you win the game!');
+    }
 
     
 }
