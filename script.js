@@ -1,96 +1,59 @@
+const buttons = document.querySelectorAll('input')
+let playerScore = 0;
+let computerScore = 0;
+
+
 function getComputerChoice() {
-    const choices = ['ROCK', 'PAPER', 'SCISSORS'];
+    const choices = ['rock', 'paper', 'scissors'];
 
     return choices[Math.floor(Math.random()* choices.length)];
 }
 
-// In the future improve this part
-function compareChoices(a,b) {
-    switch (a) {
-        case 'ROCK':
-            if (b == "ROCK"){
-                return "It's a draw";
-            }
-            else if (b == 'SCISSORS'){
-                return "Rock beats scissors, computer wins!";
-            }
-            else {
-                return "Paper beats rock, you win!";
-            }
-            break;
-
-        case 'SCISSORS':
-            if (b == "ROCK"){
-                return "Rock beats scissors, you win!";
-            }
-            else if (b == 'SCISSORS'){
-                return "It's a draw";
-            }
-            else {
-                return "Scissors beat paper, computer wins!";
-            }
-            break;
-
-        case 'PAPER':
-            if (b == "ROCK"){
-                return "Paper beats rock, computer wins!";
-            }
-            else if (b == 'SCISSORS'){
-                return "Scissors beat paper, you win!";
-            }
-            else {
-                return "It's a draw";
-            }
-            break;
-    }
-
+function disableButtons() {
+    buttons.forEach(btn => {
+        btn.disabled = true
+    })
 }
 
-const choices = ['ROCK', 'PAPER', 'SCISSORS'];
-
-
-
-
-
-for (let i = 0, j = 0; i < 5 || j < 5; ) {
+function playRound(playerChoice) {
+    let computerChoice = getComputerChoice();
+    let result = ''
     
-    let userChoice = prompt("Please enter your choice").toUpperCase();
-
-    
-        while (!(choices.includes(userChoice))){
-    userChoice = prompt("You have to enter \"rock\", \"paper\" or \"scissors\"");
+    if ((playerChoice == 'rock' && computerChoice == 'scissors') ||
+        (playerChoice == 'paper' && computerChoice == 'rock') ||
+        (playerChoice == 'scissors' && computerChoice == 'paper')) {
+            playerScore++;
+            result += `You win! ${playerChoice} beats ${computerChoice}
+            <br><br>Player score: ${playerScore} <br>Computer score: ${computerScore}`
+          
+    if (playerScore == 5) {
+        result += '<br>Congratulations! You won the game!'
+        disableButtons()
+        }
     }
-
-    let result = compareChoices(getComputerChoice(), userChoice.toUpperCase());
-    
-    if (result.includes("computer")){
-        
-        
-        i++;
-    }
-    else if (result.includes("you")) {
-        
-        
-        j++;
-    }  
-    
-    if (i <5 || j <5) {
-        console.log('Game in progress');
-    }
-    else if (i == 5) {
-        console.log('Computer wins the game!');
+    else if (playerChoice == computerChoice){
+        result += `It\'s a draw! <br><br>Player score: ${playerScore} <br>Computer score: ${computerScore}`
     }
     else {
-        console.log('Congratulations you win the game!');
+        computerScore++;
+        result = `You loose! ${computerChoice} beats ${playerChoice}
+        <br><br>Player score: ${playerScore} <br>Computer score: ${computerScore}`
+        
+        if(computerScore == 5){
+            result += '<br>Computer won the game!'
+            disableButtons()  
+        }
     }
-
-    
+    document.getElementById('result').innerHTML = result;
+    return
 }
 
 
 
 
 
-
-
-
+buttons.forEach(button =>{
+    button.addEventListener('click', function(){
+        playRound(button.value)
+    })
+})
