@@ -3,3 +3,9 @@ body {
     text-align: center;
     color: white;
 }
+
+
+#result {
+    margin-top: 10px;
+    height: 120px;
+}

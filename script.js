@@ -57,3 +57,6 @@ buttons.forEach(button =>{
         playRound(button.value)
     })
 })
+
+reload = document.getElementById('reload-game')
+reload.addEventListener('click', () => location.reload())
